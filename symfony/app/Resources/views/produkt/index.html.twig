@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="display-4">Lista produktów</h1>
+    <a href="http://127.0.0.1:8000/json"class="btn btn-info">
+        JSON
+    </a>
+
+    <table class="table table-striped bg-success">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Cena [zł]</th>
+                <th>Waga [g]</th>
+                <th>Hak</th>
+                <th>Producent haka</th>
+                <th>Typ</th>
+                <th>Stworzono</th>
+                <th>Zaktualizowano</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produkt in produkts %}
+            <tr>
+                <td><a href="{{ path('produkt_show', { 'id': produkt.id }) }}" class="btn btn-info">{{ produkt.id }}</a></td>
+                <td>{{ produkt.name }}</td>
+                <td>{{ produkt.price }}</td>
+                <td>{{ produkt.weight }}</td>
+                <td>{{ produkt.hook }}</td>
+                <td>{{ produkt.hookproducent }}</td>
+                <td>{{ produkt.type }}</td>
+                <td>{% if produkt.createdAt %}{{ produkt.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if produkt.updatedAt %}{{ produkt.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+
+                            <a  href="{{ path('produkt_show', { 'id': produkt.id }) }}"class="btn btn-primary">Pokaż</a>
+
+                            <a  href="{{ path('produkt_edit', { 'id': produkt.id }) }}"class="btn btn-info">Edytuj</a>
+
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+            <a href="{{ path('produkt_new') }}"class="btn btn-dark">Stwórz</a>
+<br>
+            <a href="{{ path('produkt_sort') }}"class="btn btn-dark"> Wskaż przedmiot o numerze id = 57 </a>
+<br>
+
+    <a href="http://127.0.0.1:8000"class="btn btn-dark">
+        Powrót na stronę główną
+    </a>
+{% endblock %}

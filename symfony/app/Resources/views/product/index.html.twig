@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="display-4">Lista produktów</h1>
+    <a href="http://127.0.0.1:8000/json2"class="btn btn-info">
+        JSON
+    </a>
+    <table class="table table-bordered bg-success">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Cena [zł]</th>
+                <th>Typ</th>
+                <th>Utworzono</th>
+                <th>Zaktualizowano</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.type }}</td>
+                <td>{% if product.createdAt %}{{ product.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if product.updatedAt %}{{ product.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('product_show', { 'id': product.id }) }}">Pokaż</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('product_edit', { 'id': product.id }) }}">Edytuj</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+            <a href="{{ path('product_new') }}"class="btn btn-dark">Stwórz</a>
+    <br>
+    <a href="{{ path('product_sort') }}"class="btn btn-dark"> Wskaż przedmiot o numerze id = 57 </a>
+    <br>
+    <a href="http://127.0.0.1:8000"class="btn btn-dark">
+        Powrót na stronę główną
+    </a>
+{% endblock %}

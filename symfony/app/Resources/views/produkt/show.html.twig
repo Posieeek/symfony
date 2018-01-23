@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Produkty</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produkt.id }}</td>
+            </tr>
+            <tr>
+                <th>Nazwa</th>
+                <td>{{ produkt.name }}</td>
+            </tr>
+            <tr>
+                <th>Cena</th>
+                <td>{{ produkt.price }}</td>
+            </tr>
+            <tr>
+                <th>Waga</th>
+                <td>{{ produkt.weight }}</td>
+            </tr>
+            <tr>
+                <th>Hak</th>
+                <td>{{ produkt.hook }}</td>
+            </tr>
+            <tr>
+                <th>Producent haka</th>
+                <td>{{ produkt.hookproducent }}</td>
+            </tr>
+            <tr>
+                <th>Typ</th>
+                <td>{{ produkt.type }}</td>
+            </tr>
+            <tr>
+                <th>Stworzono</th>
+                <td>{% if produkt.createdAt %}{{ produkt.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Zaktualizowano</th>
+                <td>{% if produkt.updatedAt %}{{ produkt.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('produkt_index') }}"class="btn-bd-primary">Wróć do listy artykułów</a>
+        </li>
+        <li>
+            <a href="{{ path('produkt_edit', { 'id': produkt.id }) }}">Edytuj</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Usuń">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
